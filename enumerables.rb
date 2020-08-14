@@ -2,17 +2,17 @@ module Enumerable
 
   # My Each Method
 
-  def my_each(arr)
-
-    for item in arr do
-      yield item
-    end 
-
+  def my_each
+    return to_enum(:my_each) unless block_given?
+    arr = self.class == Array ? self : to_a
+    counter = 0
+    while counter <arr.length
+      yield(arr[counter])
+      counter += 1
+    end
+    arr
   end
 
-  my_arr = [1, 2, 34, 54, 54]
-
-  puts my_each(my_arr) { item * 2 }
 
   # My Each With Index
 
@@ -68,4 +68,8 @@ module Enumerable
     yield
   end
 
+  puts 'my_each Array'
+  [1, 2, 34, 44, 54].my_each do |n|
+    puts n 
+    end
 end
