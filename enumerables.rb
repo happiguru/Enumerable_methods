@@ -35,6 +35,48 @@ module Enumerable
     puts new_array
   end
 
+  # My All?
+
+  def my_all?
+    yield
+  end
+
+  # My Any?
+
+  def my_any?
+    yield
+  end
+
+  # My None?
+
+  def my_none?
+    yield
+  end
+
+  # My Count
+
+  def my_count
+    yield
+  end
+
+  # My Map 
+
+  def my_map
+    yield
+  end
+
+  # My Inject
+
+  def my_inject
+    yield
+  end
+
+  # Multiply LS
+
+  def multiply_ls
+    yield
+  end
+
   puts 'my_each Array'
   [1, 2, 34, 44, 54].my_each do |n|
     puts n 
