@@ -64,7 +64,16 @@ module Enumerable
   # My None?
 
   def my_none?
-    yield
+    result = false
+    self.my_each do | item |
+      if yield(item)
+        result = false
+      else
+        result = true
+      end
+      result
+    end
+    result
   end
 
   # My Count
