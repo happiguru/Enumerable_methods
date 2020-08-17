@@ -1,7 +1,7 @@
 module Enumerable
+
   # My Each Method
   def my_each
-
     return to_enum(:my_each) unless block_given?
 
     arr = self.class == Array ? self : to_a
@@ -12,11 +12,11 @@ module Enumerable
     end
     arr
   end
+
   # My Each With Index
   def my_each_with_index
 
     return to_enum(:my_each_with_index) unless block_given?
-
     arr = self.class == Array ? self : to_a
     counter = 0
     while counter < arr.length
@@ -25,6 +25,7 @@ module Enumerable
     end
     arr
   end
+
   # My Select
   def my_select
 
@@ -45,10 +46,12 @@ module Enumerable
     end
     result
   end
+
   # My Any?
   def my_any?
 
     result = false
+
     my_each do |item|
       next unless yield(item)
         result = true
@@ -57,6 +60,7 @@ module Enumerable
     end
     result
   end
+
   # My None?
   def my_none?
 
@@ -71,6 +75,7 @@ module Enumerable
     end
     result
   end
+
   # My Count
   def my_count
 
@@ -80,6 +85,7 @@ module Enumerable
     end
     counter
   end
+
   # My Map 
   def my_map(&block_given)
 
@@ -89,6 +95,7 @@ module Enumerable
     end
     result
   end
+
   # My Inject
   def my_inject(start_value = 0)
 
@@ -100,6 +107,7 @@ module Enumerable
     end
     accumulator
   end
+
   # Multiply LS
   def multiply_els
 
