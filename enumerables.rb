@@ -26,9 +26,9 @@ module Enumerable
   end
 
   # My Select
-  def my_select
+  def my_select(arr)
     new_array = []
-    my_each do |index_value|
+    arr.my_each do |index_value|
       new_array << index_value if yield(index_value)
     end
     new_array
@@ -73,9 +73,9 @@ module Enumerable
   end
 
   # My Map
-  def my_map(&block_given)
+  def my_map(arr, &block_given)
     result = []
-    my_each do |element|
+    arr.my_each do |element|
       result << block_given.call(element)
     end
     result
@@ -111,7 +111,7 @@ puts 'my_each_with_index Array'
 end
 
 puts 'my_select'
-puts [8, 5, 69, 10, 7].my_select() { |n| n > 6 }
+puts my_arr.my_select(my_arr) { |n| n > 6 }
 
 puts 'my_all?'
 puts my_arr.my_all?(my_arr) { |n| n == 6 }
@@ -126,7 +126,7 @@ puts 'my-count'
 puts my_arr.my_count(my_arr) { |n| (n % 2).zero? }
 
 puts 'my_map'
-puts my_arr.my_map() { |n| n + 4 }
+puts my_arr.my_map(my_arr) { |n| n + 4 }
 puts 'my_inject'
 puts my_arr.my_inject(3) { |n, y| n + y }
 
