@@ -123,4 +123,20 @@ module Enumerable
   [8, 5, 69, 10, 7].my_select do |n|
     n>6
   end
+
+  puts 'my_all?'
+  puts my_arr.my_all?{ | n | n == 6 }
+
+  puts 'my_any?'
+  puts my_arr.my_any?{ | n | n == 1 }
+
+  puts 'my_none?'
+  puts my_arr.my_none?{ | n | n > 6 }
+
+  puts 'my-count'
+  puts my_arr.my_count{ | n | n % 2 == 0 }
+
+  puts 'my_map'
+  puts my_arr.my_map{ | n | n + 4 }
+
 end
