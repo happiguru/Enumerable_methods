@@ -29,8 +29,8 @@ module Enumerable
   def my_select
     new_array = []
     my_each { |index_value| new_array << index_value if yield(index_value) }
-      puts new_array
-    end
+        puts new_array
+      end
   end
 
   # My All?
