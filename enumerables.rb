@@ -44,9 +44,9 @@ module Enumerable
   end
 
   # My Any?
-  def my_any?
+  def my_any?(arr)
     result = false
-    my_each do |item|
+    arr.my_each do |item|
       next unless yield(item)
 
       result = true
@@ -55,18 +55,18 @@ module Enumerable
   end
 
   # My None?
-  def my_none?
+  def my_none?(arr)
     result = true
-    my_each do |item|
+    arr.my_each do |item|
       result = false if yield(item)
     end
     result
   end
 
   # My Count
-  def my_count
+  def my_count(arr)
     counter = 0
-    my_each do |item|
+    arr.my_each do |item|
       counter += 1 if yield(item)
     end
     counter
@@ -117,13 +117,13 @@ puts 'my_all?'
 puts my_arr.my_all?(my_arr) { |n| n == 6 }
 
 puts 'my_any?'
-puts my_arr.my_any?() { |n| n == 1 }
+puts my_arr.my_any?(my_arr) { |n| n == 1 }
 
 puts 'my_none?'
-puts my_arr.my_none?() { |n| n > 6 }
+puts my_arr.my_none?(my_arr) { |n| n > 6 }
 
 puts 'my-count'
-puts my_arr.my_count() { |n| (n % 2).zero? }
+puts my_arr.my_count(my_arr) { |n| (n % 2).zero? }
 
 puts 'my_map'
 puts my_arr.my_map() { |n| n + 4 }
