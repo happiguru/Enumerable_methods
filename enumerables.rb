@@ -79,8 +79,13 @@ module Enumerable
   # My Count
 
   def my_count
-    yield
+    counter = 0
+    self.my_each do | item |
+      counter += 1 if yield(item)
+    end
+    counter
   end
+
 
   # My Map 
 
