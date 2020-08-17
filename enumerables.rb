@@ -1,7 +1,7 @@
 module Enumerable
-
   # My Each Method
   def my_each
+
     return to_enum(:my_each) unless block_given?
 
     arr = self.class == Array ? self : to_a
@@ -17,6 +17,7 @@ module Enumerable
   def my_each_with_index
 
     return to_enum(:my_each_with_index) unless block_given?
+
     arr = self.class == Array ? self : to_a
     counter = 0
     while counter < arr.length
@@ -28,7 +29,6 @@ module Enumerable
 
   # My Select
   def my_select
-
     new_array = []
     my_each { |index_value| new_array << index_value if yield(index_value) }
     puts new_array
@@ -36,10 +36,9 @@ module Enumerable
 
   # My All?
   def my_all?
-
     result = nil
     my_each do |item|
-      if yield(item)
+      if yield(item == true)
         result = true
       else
         result = false
@@ -51,9 +50,9 @@ module Enumerable
   def my_any?
 
     result = false
-
     my_each do |item|
       next unless yield(item)
+      
         result = true
       end
       result
