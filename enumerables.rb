@@ -89,8 +89,12 @@ module Enumerable
 
   # My Map 
 
-  def my_map
-    yield
+  def my_map(&block_given)
+    result = []
+    self.my_each do |element|
+      result << block_given.call(element)
+    end
+    result
   end
 
   # My Inject
