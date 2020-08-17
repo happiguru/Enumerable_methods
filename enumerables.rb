@@ -82,19 +82,19 @@ module Enumerable
   end
 
   # My Inject
-  def my_inject(start_value = 0)
+  def my_inject(arr, start_value = 0)
     counter = 0
     accumulator = start_value
-    while counter < self.length
-      accumulator = yield(accumulator, self[counter])
+    while counter < arr.size
+      accumulator = yield(accumulator, arr[counter])
       counter += 1
     end
     accumulator
   end
 
   # Multiply LS
-  def multiply_els
-    my_inject(1) { |a, b| a * b }
+  def multiply_els(arr)
+    arr.my_inject(arr, 1) { |a, b| a * b }
   end
 end
 
@@ -128,7 +128,7 @@ puts my_arr.my_count(my_arr) { |n| (n % 2).zero? }
 puts 'my_map'
 puts my_arr.my_map(my_arr) { |n| n + 4 }
 puts 'my_inject'
-puts my_arr.my_inject(3) { |n, y| n + y }
+puts my_arr.my_inject(my_arr, 3) { |n, y| n + y }
 
 puts 'multiply_els'
-puts my_arr.multiply_els
+puts my_arr.multiply_els(my_arr)
