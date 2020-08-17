@@ -38,10 +38,7 @@ module Enumerable
   def my_all?
     result = false
     my_each do |item|
-    if yield(item == true)
-      result = true
-    else
-      result = false
+      result = true if yield(item == true)
     end
     result
   end
