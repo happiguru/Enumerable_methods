@@ -85,7 +85,7 @@ module Enumerable
   def my_inject(start_value = 0)
     counter = 0
     accumulator = start_value
-    while counter < self.size
+    while counter < self.length
       accumulator = yield(accumulator, self[counter])
       counter += 1
     end
@@ -94,7 +94,7 @@ module Enumerable
 
   # Multiply LS
   def multiply_els
-    self.my_inject(1) { |a, b| a * b }
+    my_inject(1) { |a, b| a * b }
   end
 end
 
