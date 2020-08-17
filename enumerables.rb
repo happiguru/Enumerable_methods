@@ -35,9 +35,9 @@ module Enumerable
   end
 
   # My All?
-  def my_all?
+  def my_all?(arr)
     result = false
-    my_each do |item|
+    arr.my_each do |item|
       result = true if yield(item == true)
     end
     result
@@ -114,7 +114,7 @@ puts 'my_select'
 puts [8, 5, 69, 10, 7].my_select() { |n| n > 6 }
 
 puts 'my_all?'
-puts my_arr.my_all?() { |n| n == 6 }
+puts my_arr.my_all?(my_arr) { |n| n == 6 }
 
 puts 'my_any?'
 puts my_arr.my_any?() { |n| n == 1 }
