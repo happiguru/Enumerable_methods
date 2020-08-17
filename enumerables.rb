@@ -38,14 +38,16 @@ module Enumerable
   def my_all?
     result = false
     my_each do |item|
-      result = true if yield(item == true)       
+    if yield(item == true)
+      result = true
+    else
+      result = false
     end
     result
   end
 
   # My Any?
   def my_any?
-
     result = false
     my_each do |item|
       next unless yield(item)
