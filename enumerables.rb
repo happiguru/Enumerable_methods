@@ -29,7 +29,6 @@ module Enumerable
   # My Select
 
   def my_select
-    return to_enum(:my_each_with_index) unless block_given?
     new_array = []
     my_each() {|index_value| new_array << index_value if yield(index_value)}
     puts new_array
@@ -99,8 +98,13 @@ module Enumerable
 
   # My Inject
 
-  def my_inject
-    yield
+  def my_inject(value)
+    counter = 0
+    self.my_each do | item, value |
+      yield(item + value)
+      self << item
+      counter += 1
+    end
   end
 
   # Multiply LS
@@ -108,6 +112,8 @@ module Enumerable
   def multiply_ls
     yield
   end
+
+  my_arr = [34, 1, 25, 91, 76]
 
   puts 'my_each Array'
   [1, 2, 34, 44, 54].my_each do |n|
@@ -121,7 +127,7 @@ module Enumerable
 
   puts 'my_select'
   [8, 5, 69, 10, 7].my_select do |n|
-    n>6
+    n > 6
   end
 
   puts 'my_all?'
@@ -138,5 +144,8 @@ module Enumerable
 
   puts 'my_map'
   puts my_arr.my_map{ | n | n + 4 }
+
+  puts 'my_inkect'
+  puts my_arr.my_inject(3){ | n, y | n * y}
 
 end
