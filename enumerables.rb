@@ -29,7 +29,7 @@ module Enumerable
   def my_select
     new_array = []
     my_each { |index_value| new_array << index_value if yield(index_value) }
-      puts new_array
+    puts new_array
     end
   end
 
@@ -38,19 +38,19 @@ module Enumerable
     result = nil
     my_each do |item|
     if yield(item == true)
-        result = true
-      else
-        result = false
-      end
+      result = true
+    else
+      result = false
+    end
     result
   end
 
   # My Any?
   def my_any?
-
     result = false
     my_each do |item|
       next unless yield(item)
+
         result = true
       end
       result
