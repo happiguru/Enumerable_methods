@@ -110,6 +110,9 @@ module Enumerable
 
   # Multiply LS
 
+  def multiply_els
+    self.my_inject(1){| a, b | a * b }
+  end
 
   my_arr = [34, 1, 25, 91, 6]
 
