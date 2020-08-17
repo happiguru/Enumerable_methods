@@ -38,7 +38,14 @@ module Enumerable
   # My All?
 
   def my_all?
-    yield
+    result = nil
+    self.my_each do | item |
+      if yield(item)
+        result = true
+      else
+        result = false
+    end
+    result
   end
 
   # My Any?
