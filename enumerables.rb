@@ -51,7 +51,14 @@ module Enumerable
   # My Any?
 
   def my_any?
-    yield
+    result = false
+    self.my_each do | item |
+      next unless yield(item)
+        result = true
+      end
+      result
+    end
+    result
   end
 
   # My None?
