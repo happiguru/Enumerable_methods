@@ -98,22 +98,20 @@ module Enumerable
 
   # My Inject
 
-  def my_inject(value)
+  def my_inject(start_value = 0)
     counter = 0
-    self.my_each do | item, value |
-      yield(item + value)
-      self << item
+    accumulator = start_value
+    while counter < self.size
+      accumulator =  yield(accumulator, self[counter])
       counter += 1
     end
+    accumulator
   end
 
   # Multiply LS
 
-  def multiply_ls
-    yield
-  end
 
-  my_arr = [34, 1, 25, 91, 76]
+  my_arr = [34, 1, 25, 91, 6]
 
   puts 'my_each Array'
   [1, 2, 34, 44, 54].my_each do |n|
@@ -145,7 +143,10 @@ module Enumerable
   puts 'my_map'
   puts my_arr.my_map{ | n | n + 4 }
 
-  puts 'my_inkect'
-  puts my_arr.my_inject(3){ | n, y | n * y}
+  puts 'my_inject'
+  puts my_arr.my_inject(3){ | n, y | n + y}
+
+  puts 'multiply_els'
+  puts my_arr.multiply_els()
 
 end
