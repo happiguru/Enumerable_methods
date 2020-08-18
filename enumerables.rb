@@ -26,7 +26,9 @@ module Enumerable
   end
 
   # My Select
-  def my_select(arr)
+  def my_select(arr = nil)
+    return to_enum(:my_each) unless block_given?
+
     new_array = []
     arr.my_each do |index_value|
       new_array << index_value if yield(index_value)
@@ -35,7 +37,7 @@ module Enumerable
   end
 
   # My All?
-  def my_all?(arr)
+  def my_all?(arr = nil)
     result = false
     arr.my_each do |item|
       result = true if yield(item == true)
@@ -44,7 +46,7 @@ module Enumerable
   end
 
   # My Any?
-  def my_any?(arr)
+  def my_any?(arr = nil)
     result = false
     arr.my_each do |item|
       next unless yield(item)
@@ -64,7 +66,7 @@ module Enumerable
   end
 
   # My Count
-  def my_count(arr)
+  def my_count(arr = nil)
     counter = 0
     arr.my_each do |item|
       counter += 1 if yield(item)
@@ -73,7 +75,9 @@ module Enumerable
   end
 
   # My Map
-  def my_map(arr, &block_given)
+  def my_map(arr = nil, &block_given)
+    return to_enum(:my_each) unless block_given?
+
     result = []
     arr.my_each do |element|
       result << block_given.call(element)
@@ -82,7 +86,7 @@ module Enumerable
   end
 
   # My Inject
-  def my_inject(arr, start_value = 0)
+  def my_inject(*arr, start_value = 0)
     counter = 0
     accumulator = start_value
     while counter < arr.size
