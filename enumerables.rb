@@ -222,3 +222,27 @@ puts Range.new(0, 9).my_count {|n| n != 6}
 
 new_harsh = { a: 1, b: 2, c: 3, d: 4, e: 5 }
 puts new_harsh.my_count {|n, y| y == 6}
+
+puts 'my_map'
+puts (0..9).my_map{|n| n + 10}
+
+puts Range.new(0, 9).my_map {|n| n - 1}
+
+new_harsh = { a: 1, b: 2, c: 3, d: 4, e: 5 }
+puts new_harsh.my_count {|n, y| y - 1}
+
+puts 'my_inject'
+puts (0..9).my_inject{|n| n + 10}
+
+puts Range.new(0, 9).my_inject {|n| n * 2}
+
+new_harsh = { a: 1, b: 2, c: 3, d: 4, e: 5 }
+puts new_harsh.my_count {|n, y| y - 1}
+
+puts 'multiply_els'
+puts (0..9).multiply_els(4)
+
+puts Range.new(0, 9).multiply_els(2)
+
+new_harsh = { a: 1, b: 2, c: 3, d: 4, e: 5 }
+puts new_harsh.multiply_els(2)
