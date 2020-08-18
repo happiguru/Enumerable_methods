@@ -115,19 +115,27 @@ module Enumerable
         counter += 1
       end
     end
-    
+
     counter
   end
 
   # My Map
-  def my_map(arr = nil, &block_given)
-    return to_enum(:my_each) unless block_given?
+  def my_map(arr = nil)
+    temp_array = []
 
-    result = []
-    arr.my_each do |element|
-      result << block_given.call(element)
+    if arr.class == Proc
+      Array(self).my_each do |arg|
+        temp_array.push(arr.call(arg))
+      end
+      temp_array
     end
-    result
+
+    return to_enum unless block_given?
+
+    Array(self).my_each do |arg|
+      temp_array.push(yield(arg))
+    end
+    temp_array
   end
 
   # My Inject
