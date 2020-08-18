@@ -13,13 +13,10 @@ module Enumerable
   def my_each_with_index
     return to_enum(:my_each_with_index) unless block_given?
 
-    arr = self.class == Array ? self : to_a
-    counter = 0
-    while counter < arr.length
-      yield(arr[counter], counter)
-      counter += 1
+    Array(self).length.times do |idx|
+      yield(Array(self)[idx], idx)
     end
-    arr
+    self
   end
 
   # My Select
