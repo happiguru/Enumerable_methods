@@ -26,6 +26,7 @@ module Enumerable
     new_array = []
     Array(self).my_each do |index_value|
       next unless yield(index_value)
+
       new_array.push(index_value)
     end
     new_array
@@ -34,19 +35,17 @@ module Enumerable
   # My All?
   def my_all?(argument = nil)
     Array(self).my_each do |item|
-    
       if !block_given?
       
         case argument
-        
-          when argument.nil?
-            next if item
-          when argument.class==Class
-            next if item.is_a? argument
-          when argument.class == regexp
-            next if item =~ argument
-          when (item.is_a?Numeric) || (item.is_a? String)
-            next if item == argument
+        when argument.nil?
+          next if item
+        when argument.class==Class
+          next if item.is_a? argument
+        when argument.class == regexp
+          next if item =~ argument
+        when (item.is_a?Numeric) || (item.is_a? String)
+          next if item == argument
         end
       elsif yield(item)
         next
@@ -61,15 +60,14 @@ module Enumerable
     Array(self).my_each do |arg|
       if !block_given?
         case arr
-
-          when arr.nil?
-            next unless arg
-          when arr.class == Class
-            next unless arg.is_a? arr
-          when arr.class == Regexp
-            next unless arg =~ arr
-          when (arg.is_a? Numeric) || (arg.is_a? String)
-            next unless arg == arr
+        when arr.nil?
+          next unless arg
+        when arr.class == Class
+          next unless arg.is_a? arr
+        when arr.class == Regexp
+          next unless arg =~ arr
+        when (arg.is_a? Numeric) || (arg.is_a? String)
+          next unless arg == arr
         end
       else 
         next unless yield(arg)
@@ -84,15 +82,14 @@ module Enumerable
     Array(self).my_each do |arg|
       if !block_given?
         case arr
-
-          when arr.nil?
-            next unless arg
-          when arr.class == Class
-            next unless arg
-          when arr.class == Regexp
-            next unless arg =~ arr
-          when (arg.is_a? Numeric) || (arg.is_a? String)
-            next unless arg == arr
+        when arr.nil?
+          next unless arg
+        when arr.class == Class
+          next unless arg
+        when arr.class == Regexp
+          next unless arg =~ arr
+        when (arg.is_a? Numeric) || (arg.is_a? String)
+          next unless arg == arr
         end
       else
         next unless yield(arg)
@@ -109,27 +106,23 @@ module Enumerable
       if !block_given?
         return Array(self).length if arg.nil?
         next if arg != arr
-
         counter += 1
       elsif yield(arg) == true
         counter += 1
       end
     end
-
     counter
   end
 
   # My Map
   def my_map(arr = nil)
     temp_array = []
-
     if arr.class == Proc
       Array(self).my_each do |arg|
         temp_array.push(arr.call(arg))
       end
       temp_array
     end
-
     return to_enum unless block_given?
 
     Array(self).my_each do |arg|
