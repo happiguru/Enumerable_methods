@@ -37,19 +37,16 @@ module Enumerable
   # My All?
   def my_all?(argument = nil)
     Array(self).my_each do |item|
-    
       if !block_given?
-      
         case argument
-        
-          when argument.nil?
-            next if item
-          when argument.class==Class
-            next if item.is_a? argument
-          when argument.class == regexp
-            next if item =~ argument
-          when (item.is_a?Numeric) || (item.is_a? String)
-            next if item == argument
+        when argument.nil?
+          next if item
+        when argument.class == Class
+          next if item.is_a? argument
+        when argument.class == regexp
+          next if item =~ argument
+        when (item.is_a? Numeric) || (item.is_a? String)
+          next if item == argument
         end
       elsif yield(item)
         next
@@ -65,16 +62,16 @@ module Enumerable
       if !block_given?
         case arr
 
-          when arr.nil?
-            next unless arg
-          when arr.class == Class
-            next unless arg.is_a? arr
-          when arr.class == Regexp
-            next unless arg =~ arr
-          when (arg.is_a? Numeric) || (arg.is_a? String)
-            next unless arg == arr
+        when arr.nil?
+          next unless arg
+        when arr.class == Class
+          next unless arg.is_a? arr
+        when arr.class == Regexp
+          next unless arg =~ arr
+        when (arg.is_a? Numeric) || (arg.is_a? String)
+          next unless arg == arr
         end
-      else 
+      else
         next unless yield(arg)
       end
       return true
@@ -88,14 +85,14 @@ module Enumerable
       if !block_given?
         case arr
 
-          when arr.nil?
-            next unless arg
-          when arr.class == Class
-            next unless arg
-          when arr.class == Regexp
-            next unless arg =~ arr
-          when (arg.is_a? Numeric) || (arg.is_a? String)
-            next unless arg == arr
+        when arr.nil?
+          next unless arg
+        when arr.class == Class
+          next unless arg
+        when arr.class == Regexp
+          next unless arg =~ arr
+        when (arg.is_a? Numeric) || (arg.is_a? String)
+          next unless arg == arr
         end
       else
         next unless yield(arg)
@@ -143,7 +140,6 @@ module Enumerable
 
   # My Inject
   def my_inject(*arr)
-    
     skip_flag = false
     accumulator = Array(self)[0]
     if (arr[0].class == Symbol) || arr[0].nil?
