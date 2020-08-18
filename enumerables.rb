@@ -20,12 +20,13 @@ module Enumerable
   end
 
   # My Select
-  def my_select(arr = nil)
-    return to_enum(:my_each) unless block_given?
+  def my_select()
+    return to_enum(:my_select) unless block_given?
 
     new_array = []
-    arr.my_each do |index_value|
-      new_array << index_value if yield(index_value)
+    Array(self).my_each do |index_value|
+      next unless yield(index_value)
+      result.push(index_value)
     end
     new_array
   end
@@ -96,37 +97,23 @@ module Enumerable
   end
 end
 
-my_arr = [34, 1, 25, 91, 6]
-
-puts 'my_each Array'
-[1, 2, 34, 44, 54].my_each do |n|
+puts 'my_each'
+(0..9).my_each do |n|
   puts n
 end
 
-puts 'my_each_with_index Array'
-[55, 6, 89, 74, 57].my_each_with_index do |n, i|
+Range.new(0, 9).my_each do |n|
+  puts n
+end
+
+puts 'my_each_with_index'
+(0..9).my_each_with_index do |n, i|
   puts i.to_s + ' : ' + n.to_s
 end
 
-puts 'my_select'
-puts my_arr.my_select(my_arr) { |n| n > 6 }
+Range.new(0, 9).my_each_with_index do |n, i|
+    puts i.to_s + ' : ' + n.to_s
+end
 
-puts 'my_all?'
-puts my_arr.my_all?(my_arr) { |n| n == 6 }
 
-puts 'my_any?'
-puts my_arr.my_any?(my_arr) { |n| n == 1 }
 
-puts 'my_none?'
-puts my_arr.my_none?(my_arr) { |n| n > 6 }
-
-puts 'my-count'
-puts my_arr.my_count(my_arr) { |n| (n % 2).zero? }
-
-puts 'my_map'
-puts my_arr.my_map(my_arr) { |n| n + 4 }
-puts 'my_inject'
-puts my_arr.my_inject(my_arr, 3) { |n, y| n + y }
-
-puts 'multiply_els'
-puts my_arr.multiply_els(my_arr)
