@@ -86,7 +86,7 @@ module Enumerable
   end
 
   # My Inject
-  def my_inject(*arr, start_value = 0)
+  def my_inject(arr, start_value = 0)
     counter = 0
     accumulator = start_value
     while counter < arr.size
