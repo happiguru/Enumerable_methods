@@ -1,3 +1,5 @@
+# rubocop:disable Metrics/PerceivedComplexity,Metrics/CyclomaticComplexity,Metrics/ModuleLength
+
 module Enumerable
   # My Each Method
   def my_each
@@ -26,6 +28,7 @@ module Enumerable
     new_array = []
     Array(self).my_each do |index_value|
       next unless yield(index_value)
+
       new_array.push(index_value)
     end
     new_array
@@ -162,6 +165,8 @@ module Enumerable
     accumulator
   end
 end
+
+# rubocop:enable Metrics/PerceivedComplexity,Metrics/CyclomaticComplexity,Metrics/ModuleLength
 
 # Multiply LS
 def multiply_els(arr)
