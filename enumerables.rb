@@ -26,18 +26,34 @@ module Enumerable
     new_array = []
     Array(self).my_each do |index_value|
       next unless yield(index_value)
-      result.push(index_value)
+      new_array.push(index_value)
     end
     new_array
   end
 
   # My All?
-  def my_all?(arr = nil)
-    result = false
-    arr.my_each do |item|
-      result = true if yield(item == true)
+  def my_all?(argument = nil)
+    Array(self).my_each do |item|
+    
+      if !block_given?
+      
+        case argument
+        
+          when argument.nil?
+            next if item
+          when argument.class==Class
+            next if item.is_a? argument
+          when argument.class == regexp
+            next if item =~ argument
+          when (item.is_a?Numeric) || (item.is_a? String)
+            next if item == argument
+        end
+      elsif yield(item)
+        next
+      end
+      return false
     end
-    result
+    true
   end
 
   # My Any?
@@ -115,5 +131,15 @@ Range.new(0, 9).my_each_with_index do |n, i|
     puts i.to_s + ' : ' + n.to_s
 end
 
+puts 'my_select'
+puts (0..9).my_select { |n| n < 6 }
 
+puts Range.new(0, 9).my_select { |n| n > 6 }
 
+puts 'my_all?'
+puts (0..9).my_all?{|n| n < 10}
+
+puts Range.new(0, 9).my_all? {|n| n != 6}
+
+new_harsh = { a: 1, b: 2, c: 3, d: 4, e: 5 }
+puts new_harsh.my_all? {|n, y| y == 6}
