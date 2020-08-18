@@ -141,6 +141,7 @@ module Enumerable
   # My Inject
   def my_inject(*arr)
     raise('LocalJumpError.new NO BLOCK OR ARGUMENT GIVEN!') if !block_given? && arguments.empty?
+    
     skip_flag = false
     accumulator = Array(self)[0]
     if (arr[0].class == Symbol) || arr[0].nil?
