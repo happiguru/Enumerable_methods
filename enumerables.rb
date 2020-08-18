@@ -36,15 +36,14 @@ module Enumerable
   def my_all?(argument = nil)
     Array(self).my_each do |item|
       if !block_given?
-      
         case argument
         when argument.nil?
           next if item
-        when argument.class==Class
+        when argument.class == Class
           next if item.is_a? argument
         when argument.class == regexp
           next if item =~ argument
-        when (item.is_a?Numeric) || (item.is_a? String)
+        when (item.is_a? Numeric) || (item.is_a? String)
           next if item == argument
         end
       elsif yield(item)
@@ -69,7 +68,7 @@ module Enumerable
         when (arg.is_a? Numeric) || (arg.is_a? String)
           next unless arg == arr
         end
-      else 
+      else
         next unless yield(arg)
       end
       return true
@@ -106,6 +105,7 @@ module Enumerable
       if !block_given?
         return Array(self).length if arg.nil?
         next if arg != arr
+
         counter += 1
       elsif yield(arg) == true
         counter += 1
@@ -135,7 +135,7 @@ module Enumerable
   def my_inject(*arr)
     raise('LocalJumpError.new NO BLOCK OR ARGUMENT GIVEN!') if !block_given? && arguments.empty?
 
-    skip_flag = false
+    
     accumulator = Array(self)[0]
     if (argument[0].class = Symbol) || argument
       while counter < arr.size
@@ -151,58 +151,3 @@ module Enumerable
     arr.my_inject(:*)
   end
 end
-
-puts 'my_each'
-(0..9).my_each do |n|
-  puts n
-end
-
-Range.new(0, 9).my_each do |n|
-  puts n
-end
-
-puts 'my_each_with_index'
-(0..9).my_each_with_index do |n, i|
-  puts i.to_s + ' : ' + n.to_s
-end
-
-Range.new(0, 9).my_each_with_index do |n, i|
-    puts i.to_s + ' : ' + n.to_s
-end
-
-puts 'my_select'
-puts (0..9).my_select { |n| n < 6 }
-
-puts Range.new(0, 9).my_select { |n| n > 6 }
-
-puts 'my_all?'
-puts (0..9).my_all?{|n| n < 10}
-
-puts Range.new(0, 9).my_all? {|n| n != 6}
-
-new_harsh = { a: 1, b: 2, c: 3, d: 4, e: 5 }
-puts new_harsh.my_all? {|n, y| y == 6}
-
-puts 'my_none?'
-puts (0..9).my_none?{|n| n < 10}
-
-puts Range.new(0, 9).my_none? {|n| n != 6}
-
-new_harsh = { a: 1, b: 2, c: 3, d: 4, e: 5 }
-puts new_harsh.my_none? {|n, y| y == 6}
-
-puts 'my_any?'
-puts (0..9).my_any?{|n| n < 10}
-
-puts Range.new(0, 9).my_any? {|n| n != 6}
-
-new_harsh = { a: 1, b: 2, c: 3, d: 4, e: 5 }
-puts new_harsh.my_any? {|n, y| y == 6}
-
-puts 'my_count'
-puts (0..9).my_count{|n| n < 10}
-
-puts Range.new(0, 9).my_count {|n| n != 6}
-
-new_harsh = { a: 1, b: 2, c: 3, d: 4, e: 5 }
-puts new_harsh.my_count {|n, y| y == 6}
