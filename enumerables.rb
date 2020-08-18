@@ -58,30 +58,64 @@ module Enumerable
 
   # My Any?
   def my_any?(arr = nil)
-    result = false
-    arr.my_each do |item|
-      next unless yield(item)
+    Array(self).my_each do |arg|
+      if !block_given?
+        case arr
 
-      result = true
+          when arr.nil?
+            next unless arg
+          when arr.class == Class
+            next unless arg.is_a? arr
+          when arr.class == Regexp
+            next unless arg =~ arr
+          when (arg.is_a? Numeric) || (arg.is_a? String)
+            next unless arg == arr
+        end
+      else 
+        next unless yield(arg)
+      end
+      return true
     end
-    result
+    false
   end
 
   # My None?
-  def my_none?(arr)
-    result = true
-    arr.my_each do |item|
-      result = false if yield(item)
+  def my_none?(arr = nil)
+    Array(self).my_each do |arg|
+      if !block_given?
+        case arr
+
+          when arr.nil?
+            next unless arg
+          when arr.class == Class
+            next unless arg
+          when arr.class == Regexp
+            next unless arg =~ arr
+          when (arg.is_a? Numeric) || (arg.is_a? String)
+            next unless arg == arr
+        end
+      else
+        next unless yield(arg)
+      end
+      return false
     end
-    result
+    true
   end
 
   # My Count
   def my_count(arr = nil)
     counter = 0
-    arr.my_each do |item|
-      counter += 1 if yield(item)
+    Array(self).my_each do |arg|
+      if !block_given?
+        return Array(self).length if arg.nil?
+        next if arg != arr
+
+        counter += 1
+      elsif yield(arg) == true
+        counter += 1
+      end
     end
+    
     counter
   end
 
