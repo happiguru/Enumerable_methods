@@ -151,7 +151,7 @@ module Enumerable
 
   # Multiply LS
   def multiply_els(arr)
-    arr.my_inject(arr, 1) { |a, b| a * b }
+    arr.my_inject(:*)
   end
 end
 
