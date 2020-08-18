@@ -139,12 +139,25 @@ module Enumerable
   end
 
   # My Inject
-  def my_inject(arr, start_value = 0)
-    counter = 0
-    accumulator = start_value
-    while counter < arr.size
-      accumulator = yield(accumulator, arr[counter])
-      counter += 1
+  def my_inject(*arr)
+    
+    skip_flag = false
+    accumulator = Array(self)[0]
+    if (arr[0].class == Symbol) || arr[0].nil?
+      skip_flag = true
+    elsif arr[0].is_a? Numeric
+      accumulator = arr[0]
+    end
+    Array(self).my_each_with_index do |arg, i|
+      next if skip_flag && i.zero?
+
+      if block_given?
+        accumulator = yield(accumulator, arg)
+      elsif arr[0].class == Symbol
+        accumulator = accumulator.send(arr[0], arg)
+      elsif arr[0].is_a? Numeric
+        accumulator = accumulator.send(arr[1], arg)
+      end
     end
     accumulator
   end
