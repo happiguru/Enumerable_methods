@@ -3,13 +3,10 @@ module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
 
-    arr = self.class == Array ? self : to_a
-    counter = 0
-    while counter < arr.length
-      yield(arr[counter])
-      counter += 1
+    Array(self).length.times do |idx|
+      yield(Array(self)[idx])
     end
-    arr
+    self
   end
 
   # My Each With Index
