@@ -125,7 +125,7 @@ module Enumerable
   end
 
   def my_inject(*arguments)
-    # raise('LocalJumpError.new NO BLOCK OR ARGUMENT GIVEN!') if !block_given? && arguments.empty?
+    raise('LocalJumpError.new NO BLOCK OR ARGUMENT GIVEN!') if !block_given? && arguments.empty?
 
     skip_flag = false
     acummulator = Array(self)[0]
@@ -138,7 +138,7 @@ module Enumerable
       next if skip_flag && index.zero?
 
       if block_given?
-        acummulator = yield(acum, item)
+        acummulator = yield(acummulator, item)
       elsif arguments[0].class == Symbol
         acummulator = acummulator.send(arguments[0], item)
       elsif arguments[0].is_a? Numeric
