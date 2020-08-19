@@ -30,18 +30,17 @@ module Enumerable
     new_array
   end
 
-  def my_all?(argument = nil)
+  def my_all?(arr = nil)
     Array(self).my_each do |item|
       if !block_given?
-        case argument
-        when argument.nil?
+        if arr.nil?
           next if item
-        when argument.class == Class
-          next if item.is_a? argument
-        when argument.class == Regexp
-          next if item =~ argument
-        when (item.is_a? Numeric) || (item.is_a? String)
-          next if item == argument
+        elsif arr.class == Class
+          next if item.is_a? arr
+        elsif arr.class == Regexp
+          next if item =~ arr
+        elsif (item.is_a? Numeric) || (item.is_a? String)
+          next if item == arr
         end
       elsif yield(item)
         next
