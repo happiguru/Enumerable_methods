@@ -125,7 +125,7 @@ module Enumerable
   end
 
   def my_inject(*arguments)
-    raise('LocalJumpError.new NO BLOCK OR ARGUMENT GIVEN!') if !block_given? && arguments.empty?
+    # raise('LocalJumpError.new NO BLOCK OR ARGUMENT GIVEN!') if !block_given? && arguments.empty?
 
     skip_flag = false
     acummulator = Array(self)[0]
@@ -148,6 +148,8 @@ module Enumerable
     acummulator
   end
 end
+
+# rubocop:enable Metrics/PerceivedComplexity,Metrics/CyclomaticComplexity,Metrics/ModuleLength
 
 def multiply_els(arr)
   arr.my_inject(:*)
