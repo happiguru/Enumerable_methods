@@ -103,6 +103,7 @@ module Enumerable
       elsif yield(arg) == true
         counter += 1
       end
+    end
     counter
   end
 
@@ -149,4 +150,3 @@ module Enumerable
   def multiply_els(arr)
     arr.my_inject(:*)
   end
-end
