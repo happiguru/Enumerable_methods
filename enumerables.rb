@@ -149,5 +149,4 @@ module Enumerable
   def multiply_els(arr)
     arr.my_inject(:*)
   end
-  
 end
