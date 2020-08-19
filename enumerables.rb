@@ -148,6 +148,6 @@ module Enumerable
   end
 end
 
-  def multiply_els(arr)
-    arr.my_inject(:*)
-  end
+def multiply_els(arr)
+  arr.my_inject(:*)
+end
