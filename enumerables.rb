@@ -1,5 +1,4 @@
 module Enumerable
-  # My Each Method
   def my_each
     return to_enum(:my_each) unless block_given?
 
@@ -9,7 +8,6 @@ module Enumerable
     self
   end
 
-  # My Each With Index
   def my_each_with_index
     return to_enum(:my_each_with_index) unless block_given?
 
@@ -19,7 +17,6 @@ module Enumerable
     self
   end
 
-  # My Select
   def my_select()
     return to_enum(:my_select) unless block_given?
 
@@ -32,7 +29,6 @@ module Enumerable
     new_array
   end
 
-  # My All?
   def my_all?(argument = nil)
     Array(self).my_each do |item|
       if !block_given?
@@ -54,7 +50,6 @@ module Enumerable
     true
   end
 
-  # My Any?
   def my_any?(arr = nil)
     Array(self).my_each do |arg|
       if !block_given?
@@ -76,7 +71,6 @@ module Enumerable
     false
   end
 
-  # My None?
   def my_none?(arr = nil)
     Array(self).my_each do |arg|
       if !block_given?
@@ -98,7 +92,6 @@ module Enumerable
     true
   end
 
-  # My Count
   def my_count(arr = nil)
     counter = 0
     Array(self).my_each do |arg|
@@ -114,7 +107,6 @@ module Enumerable
     counter
   end
 
-  # My Map
   def my_map(arr = nil)
     temp_array = []
     if arr.class == Proc
@@ -122,17 +114,17 @@ module Enumerable
         temp_array.push(arr.call(arg))
       end
       temp_array
-    return to_enum unless block_given?
+      return to_enum unless block_given?
 
-    Array(self).my_each do |arg|
-      temp_array.push(yield(arg))
-    end
+      Array(self).my_each do |arg|
+        temp_array.push(yield(arg))
+      end
     temp_array
-  end
+    end
 
-  # My Inject
-  def my_inject(*arr)
+  def my_inject(*arguments)
     raise('LocalJumpError.new NO BLOCK OR ARGUMENT GIVEN!') if !block_given? && arguments.empty?
+    
     skip_flag = false
     acummulator = Array(self)[0]
     if (arguments[0].class == Symbol) || arguments[0].nil?
@@ -155,7 +147,6 @@ module Enumerable
     end
   end
 
-  # Multiply LS
   def multiply_els(arr)
     arr.my_inject(:*)
   end
