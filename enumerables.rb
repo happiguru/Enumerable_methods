@@ -101,11 +101,13 @@ module Enumerable
         next if arg != arr
 
         counter += 1
+        counter = length
       elsif yield(arg) == true
         counter += 1
+        counter = length
       end
     end
-    counter
+    length
   end
 
   def my_map(arr = nil)
@@ -154,3 +156,5 @@ end
 def multiply_els(arr)
   arr.my_inject(:*)
 end
+
+puts [1, 2, 3].my_count()
