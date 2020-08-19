@@ -125,6 +125,7 @@ module Enumerable
 
   def my_inject(*arguments)
     raise('LocalJumpError.new NO BLOCK OR ARGUMENT GIVEN!') if !block_given? && arguments.empty?
+
     skip_flag = false
     acummulator = Array(self)[0]
     if (arguments[0].class == Symbol) || arguments[0].nil?
@@ -144,8 +145,8 @@ module Enumerable
       end
     end
     acummulator
-    end
   end
+end
 
   def multiply_els(arr)
     arr.my_inject(:*)
