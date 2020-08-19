@@ -134,15 +134,14 @@ module Enumerable
   # My Inject
   def my_inject(*arr)
     raise('LocalJumpError.new NO BLOCK OR ARGUMENT GIVEN!') if !block_given? && arguments.empty?
-
     
     accumulator = Array(self)[0]
-    if (argument[0].class = Symbol) || argument
+    (return unless (argument[0].class = Symbol) || argument)
       while counter < arr.size
         accumulator = yield(accumulator, arr[counter])
         counter += 1
       end
-    accumulator
+      accumulator
     end
   end
 
