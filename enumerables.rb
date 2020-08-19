@@ -78,7 +78,7 @@ module Enumerable
           next unless arg
         elsif arr.class == Class
           next unless arg.is_a? arr
-        elsif arr.class = Regexp
+        elsif arr.class == Regexp
           next unless arg =~ arr
         elsif (arg.is_a? Numeric) || (arg.is_a? String)
           next unless arg == arr
