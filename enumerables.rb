@@ -38,7 +38,7 @@ module Enumerable
           next if item
         when argument.class == Class
           next if item.is_a? argument
-        when argument.class == regexp
+        when argument.class == Regexp
           next if item =~ argument
         when (item.is_a? Numeric) || (item.is_a? String)
           next if item == argument
@@ -54,14 +54,13 @@ module Enumerable
   def my_any?(arr = nil)
     Array(self).my_each do |arg|
       if !block_given?
-        case arr
-        when arr.nil?
+        if arr.nil?
           next unless arg
-        when arr.class == Class
+        elsif arr.class == Class
           next unless arg.is_a? arr
-        when arr.class == Regexp
+        elsif arr.class == Regexp
           next unless arg =~ arr
-        when (arg.is_a? Numeric) || (arg.is_a? String)
+        elsif (arg.is_a? Numeric) || (arg.is_a? String)
           next unless arg == arr
         end
       else
@@ -75,14 +74,13 @@ module Enumerable
   def my_none?(arr = nil)
     Array(self).my_each do |arg|
       if !block_given?
-        case arr
-        when arr.nil?
+        if arr.nil?
           next unless arg
-        when arr.class == Class
-          next unless arg
-        when arr.class == Regexp
+        elsif arr.class == Class
+          next unless arg.is_a? arr
+        elsif arr.class = Regexp
           next unless arg =~ arr
-        when (arg.is_a? Numeric) || (arg.is_a? String)
+        elsif (arg.is_a? Numeric) || (arg.is_a? String)
           next unless arg == arr
         end
       else
