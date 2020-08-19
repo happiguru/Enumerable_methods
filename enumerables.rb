@@ -103,7 +103,6 @@ module Enumerable
       elsif yield(arg) == true
         counter += 1
       end
-    end
     counter
   end
 
@@ -113,18 +112,18 @@ module Enumerable
       Array(self).my_each do |arg|
         temp_array.push(arr.call(arg))
       end
-      temp_array
-      return to_enum unless block_given?
-
-      Array(self).my_each do |arg|
-        temp_array.push(yield(arg))
-      end
-    temp_array
+      return temp_array
     end
+    return to_enum unless block_given?
+
+    Array(self).my_each do |arg|
+      temp_array.push(yield(arg))
+    end
+    temp_array
+  end
 
   def my_inject(*arguments)
     raise('LocalJumpError.new NO BLOCK OR ARGUMENT GIVEN!') if !block_given? && arguments.empty?
-    
     skip_flag = false
     acummulator = Array(self)[0]
     if (arguments[0].class == Symbol) || arguments[0].nil?
