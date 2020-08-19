@@ -133,14 +133,25 @@ module Enumerable
   # My Inject
   def my_inject(*arr)
     raise('LocalJumpError.new NO BLOCK OR ARGUMENT GIVEN!') if !block_given? && arguments.empty?
-    
-    accumulator = Array(self)[0]
-    (return unless (argument[0].class = Symbol) || argument)
-      while counter < arr.size
-        accumulator = yield(accumulator, arr[counter])
-        counter += 1
+    skip_flag = false
+    acummulator = Array(self)[0]
+    if (arguments[0].class == Symbol) || arguments[0].nil?
+      skip_flag = true
+    elsif arguments[0].is_a? Numeric
+      acummulator = arguments[0]
+    end
+    Array(self).my_each_with_index do |item, index|
+      next if skip_flag && index.zero?
+
+      if block_given?
+        acummulator = yield(acum, item)
+      elsif arguments[0].class == Symbol
+        acummulator = acummulator.send(arguments[0], item)
+      elsif arguments[0].is_a? Numeric
+        acummulator = acummulator.send(arguments[1], item)
       end
-      accumulator
+    end
+    acummulator
     end
   end
 
