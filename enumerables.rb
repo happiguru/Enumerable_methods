@@ -156,5 +156,3 @@ end
 def multiply_els(arr)
   arr.my_inject(:*)
 end
-
-puts [1, 2, 3].my_count()
