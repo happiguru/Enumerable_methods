@@ -122,7 +122,6 @@ module Enumerable
         temp_array.push(arr.call(arg))
       end
       temp_array
-    end
     return to_enum unless block_given?
 
     Array(self).my_each do |arg|
@@ -149,8 +148,4 @@ module Enumerable
   def multiply_els(arr)
     arr.my_inject(:*)
   end
-<<<<<<< HEAD
-
-=======
->>>>>>> 6d10da9f4ba88d824df586e9ff64190f472da66e
 end
