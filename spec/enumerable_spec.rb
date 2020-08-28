@@ -77,5 +77,32 @@ describe Enumerable do
         expect([1, 1].my_any?(2)).to eql(false) 
       end
     end
+
+    describe "#my_none" do
+      it "returns true if none of the item in the array satisfy the condition in the block" do
+        expect(%w[ant bear cat].my_none? { |word| word.length == 5 }).to eql(true)
+      end
+      it "returns false if any of the item in the array satisfy the condition in the block" do
+        expect(%w[ant bear cat].my_none? { |word| word.length == 4 }).to eql(false)
+      end
+      it "returns true if none of the items matches the regex arguments" do
+        expect(%w[ant bear cat].my_none?(/x/)).to eql(true) 
+      end
+      it "returns false if any of the items matches the regex arguments" do
+        expect(%w[ant bear cat].my_none?(/a/)).to eql(false) 
+      end
+      it "returns true if none of the items is the class in the argument" do
+        expect([nil, true, "a"].my_none?(Integer)).to eql(true) 
+      end
+      it "returns false if any of the items is the class in the argument" do
+        expect([nil, true, 99].my_none?(Integer)).to eql(false) 
+      end
+      it "returns true if none of the items is equal to the argument" do
+        expect([1, 1].my_none?(2)).to eql(true) 
+      end
+      it "returns false if any of the items is equal to the argument" do
+        expect([1, 1].my_none?(1)).to eql(false) 
+      end
+    end
 end
 
