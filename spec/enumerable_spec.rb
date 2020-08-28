@@ -13,6 +13,37 @@ describe Enumerable do
         end
     end
 
-    
+    describe "#my_select" do
+      it "returns filtered array based on supplied block" do
+        expect((0...10).my_select { |i| (i % 3) == 0 }).to eql([0, 3, 6, 9])
+      end
+    end
+
+    describe "#my_all" do
+      it "returns true if all array items satisfy condition in block" do
+        expect(%w[ant bear cat].my_all? { |word| word.length >= 3 }).to eql(true)
+      end
+      it "returns false if some of the array items do not satisfy condition in block" do
+        expect(%w[ant bear cat].my_all? { |word| word.length >= 4 }).to eql(false)
+      end
+      it "returns true if all array items match regex argument" do
+        expect(%w[ant bear cat].my_all?(/a/)).to eql(true)
+      end
+      it "returns false if some array items don't match regex argument" do
+        expect(%w[ant bear cat].my_all?(/t/)).to eql(false)
+      end
+      it "returns false if all array items don't match regex argument" do
+        expect(%w[ant bear cat].my_all?(/z/)).to eql(false)
+      end
+      it "returns true if all array items are of the class in argument" do
+        expect([1, 2i, 3.14].my_all?(Numeric)).to eql(true)
+      end
+      it "returns false if some array items are not of the class in argument" do
+        expect(["a", 2i, 3.14].my_all?(Numeric)).to eql(false)
+      end
+      it "returns false if some array items are not equal to the argument" do
+        expect([1, 2].my_all?(1)).to eql(false)
+      end
+    end
 end
 
