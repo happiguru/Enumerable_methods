@@ -12,5 +12,7 @@ describe Enumerable do
             expect(test_array1.my_each_with_index { |x, y| }).to eql(test_array1)
         end
     end
+
+    
 end
 
