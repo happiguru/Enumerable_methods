@@ -90,21 +90,21 @@ module Enumerable
     true
   end
 
-  def my_count(arr = nil)
-    counter = 0
-    Array(self).my_each do |arg|
-      if !block_given?
-        return Array(self).length if arg.nil?
-        next if arg != arr
-
-        counter += 1
-        counter = length
-      elsif yield(arg) == true
-        counter += 1
-        counter = length
+  def my_count(*args)
+    count = 0
+    if args.empty?
+      if block_given?
+        my_each { |i| count += 1 if yield(i) }
+      else
+        my_each { |_i| count += 1 }
       end
+    else
+      raise ArgumentError, 'Too many arguments, Expected 1!' if args.length > 1
+
+      puts 'Warning: given block not used' if block_given?
+      my_each { |i| count += 1 if i == args[0] }
     end
-    length
+    count
   end
 
   def my_map(arr = nil)
@@ -124,7 +124,7 @@ module Enumerable
   end
 
   def my_inject(*arguments)
-    raise('LocalJumpError.new NO BLOCK OR ARGUMENT GIVEN!') if !block_given? && arguments.empty?
+    raise LocalJumpError, 'NO BLOCK OR ARGUMENT GIVEN!' if !block_given? && arguments.empty?
 
     skip_flag = false
     acummulator = Array(self)[0]
@@ -153,3 +153,5 @@ end
 def multiply_els(arr)
   arr.my_inject(:*)
 end
+
+# puts [1,2,3].my_count(9, 4)
