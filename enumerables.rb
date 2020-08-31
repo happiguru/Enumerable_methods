@@ -100,6 +100,7 @@ module Enumerable
       end
     else
       raise ArgumentError, 'Too many arguments, Expected 1!' if args.length > 1
+
       puts 'Warning: given block not used' if block_given?
       my_each { |i| count += 1 if i == args[0] }
     end
