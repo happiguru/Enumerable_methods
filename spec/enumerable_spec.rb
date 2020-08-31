@@ -1,6 +1,7 @@
 require "../enumerables.rb"
-test_array1 = [11, 2, 3, 56]
+
 describe Enumerable do
+  test_array1 = [11, 2, 3, 56]
     describe "#my_each" do
         it "returns the input array" do
             expect(test_array1.my_each { |x| print x }).to eql(test_array1)
@@ -104,5 +105,29 @@ describe Enumerable do
         expect([1, 1].my_none?(1)).to eql(false) 
       end
     end
-end
 
+    describe "#my_count" do
+      ary = [1, 2, 9, 7, 11, 23, 8]
+
+      it "it returns the number of items in an array if there is no argument given" do
+        expect(ary.my_count).to eql(7)
+      end
+      # refactor method
+      it "it returns the number of items in an array that are equal to the argument given" do
+        expect(ary.my_count(9)).to eql(1)
+      end
+
+      it "it returns the number of items in an array that satisfy the condition in the argument given" do
+        expect(ary.my_count(&:even?)).to eql(2)
+      end
+
+      it "it returns the number of items that satisfy the condition in the block given" do
+        expect(%w[ant bear cat].my_count { |i| i.is_a? String } ).to eql(3)
+      end
+
+      it "it returns the number of items in a range given" do
+        expect((1..10).my_count).to eql(10)
+      end
+    end
+    
+end
