@@ -109,25 +109,41 @@ describe Enumerable do
     describe "#my_count" do
       ary = [1, 2, 9, 7, 11, 23, 8]
 
-      it "it returns the number of items in an array if there is no argument given" do
+      it "returns the number of items in an array if there is no argument given" do
         expect(ary.my_count).to eql(7)
       end
       # refactor method
-      it "it returns the number of items in an array that are equal to the argument given" do
+      it "returns the number of items in an array that are equal to the argument given" do
         expect(ary.my_count(9)).to eql(1)
       end
 
-      it "it returns the number of items in an array that satisfy the condition in the argument given" do
+      it "returns the number of items in an array that satisfy the condition in the argument given" do
         expect(ary.my_count(&:even?)).to eql(2)
       end
 
-      it "it returns the number of items that satisfy the condition in the block given" do
+      it "returns the number of items that satisfy the condition in the block given" do
         expect(%w[ant bear cat].my_count { |i| i.is_a? String } ).to eql(3)
       end
 
-      it "it returns the number of items in a range given" do
+      it "returns the number of items in a range given" do
         expect((1..10).my_count).to eql(10)
       end
+    end
+
+    describe "#my_map" do
+      my_proc = proc { |x| x * x }
+      it "returns a new array after invoking the block once for each element" do
+        expect((1..4).my_map { |i| i * i }).to eql([1, 4, 9, 16])
+      end
+
+      it "returns the block value for each item if the block contains only a single value" do
+        expect((1..4).my_map { "cat"}).to eql(%w[cat cat cat cat])
+      end
+
+      it "returns a new array after invoking the proc once for each element" do
+        expect([1, 2, 7, 4, 5].my_map(my_proc)).to eql([1, 4, 49, 16, 25])
+      end
+
     end
     
 end
