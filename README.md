@@ -25,6 +25,7 @@ In this project, we have created Enumerable Methods to replace Ruby's enumerable
 - Code editor: VsCode
 - Language: Ruby
 - Linters: Rubocop
+- Testing: RSpec
 
 
 ## Live Demo
@@ -40,6 +41,10 @@ In this project, we have created Enumerable Methods to replace Ruby's enumerable
 
 - Download or clone the repository's files [github repo](https://github.com/happiguru/Enumerable_methods)
 
+### Tests
+
+- Run `rspec` from within the project root directory
+
 ## Authors
 
 👤 **Stanley Enow Lekunze**
@@ -52,6 +57,12 @@ In this project, we have created Enumerable Methods to replace Ruby's enumerable
 
 - Github: [@jurgen1c](https://github.com/jurgen1c)
 - LinkedIn: [jurgen-clausen](https://www.linkedin.com/in/jurgen-clausen-2740061a9/)
+
+👤 **Paul Balitema Kabali**
+
+- Github: [@pbkabali](https://github.com/pbkabali)
+- Twitter: [@pbkabali](https://twitter.com/pbkabali)
+- Linkedin: [engineerbpk](https://linkedin.com/in/engineerbpk)
 
 ## 🤝 Contributing
 
