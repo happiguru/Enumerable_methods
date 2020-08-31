@@ -124,7 +124,7 @@ module Enumerable
   end
 
   def my_inject(*arguments)
-    raise('LocalJumpError.new NO BLOCK OR ARGUMENT GIVEN!') if !block_given? && arguments.empty?
+    raise LocalJumpError, 'NO BLOCK OR ARGUMENT GIVEN!' if !block_given? && arguments.empty?
 
     skip_flag = false
     acummulator = Array(self)[0]

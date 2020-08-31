@@ -162,6 +162,10 @@ describe Enumerable do
     it 'returns a combination of all the elements of the enum by applying a binary operation, specified by a symbol' do
       expect(range.my_inject(2, :*)).to eql(302_400)
     end
+
+    it 'raise an error when no block or argument is given' do
+      expect{ range.my_inject }.to raise_error(LocalJumpError, 'NO BLOCK OR ARGUMENT GIVEN!')
+    end
   end
 
   describe '#multiply_els' do
