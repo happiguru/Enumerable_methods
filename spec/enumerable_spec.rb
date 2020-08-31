@@ -2,7 +2,7 @@ require_relative '../enumerables.rb'
 
 describe Enumerable do
   test_array1 = [11, 2, 3, 56]
-  let(:arr_1) { %w[ant bear cat] } 
+  let(:arr_1) { %w[ant bear cat] }
   let(:range) { (5..10) }
   let(:ary) { [1, 2, 9, 7, 11, 23, 8] }
   describe '#my_each' do
@@ -22,8 +22,8 @@ describe Enumerable do
       expect((0...10).my_select { |i| (i % 3) == 0 }).to eql([0, 3, 6, 9])
     end
   end
-  
-  describe '#my_all' do   
+
+  describe '#my_all' do
     it 'returns true if all array items satisfy condition in block' do
       expect(arr_1.my_all? { |word| word.length >= 3 }).to be_truthy
     end
@@ -164,7 +164,7 @@ describe Enumerable do
     end
 
     it 'raise an error when no block or argument is given' do
-      expect{ range.my_inject }.to raise_error(LocalJumpError, 'NO BLOCK OR ARGUMENT GIVEN!')
+      expect { range.my_inject }.to raise_error(LocalJumpError, 'NO BLOCK OR ARGUMENT GIVEN!')
     end
   end
 
