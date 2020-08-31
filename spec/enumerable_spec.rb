@@ -160,5 +160,11 @@ describe Enumerable do
       end
 
     end
-    
+
+    describe "#multiply_els" do
+      arr = [2, 4, 5]
+      it "returns the product of all the elements given in the array passed to the method" do
+        expect(multiply_els(arr)).to eql(40)
+      end
+    end
 end
