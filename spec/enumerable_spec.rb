@@ -143,6 +143,21 @@ describe Enumerable do
       it "returns a new array after invoking the proc once for each element" do
         expect([1, 2, 7, 4, 5].my_map(my_proc)).to eql([1, 4, 49, 16, 25])
       end
+    end
+
+    describe "#my_inject" do
+
+      it "returns a combination of all the elements of the enum by applying a binary operation, specified by a block with argument passed to the method" do
+        expect((5..10).my_inject(2) { |sum, n| sum + n }).to eql(47)
+      end
+
+      it "returns a combination of all the elements of the enum by applying a binary operation, specified by a block without argument passed to the method" do
+        expect((5..10).my_inject { |sum, n| sum + n }).to eql(45)
+      end
+
+      it "returns a combination of all the elements of the enum by applying a binary operation, specified by a symbol" do
+        expect((5..10).my_inject(2, :*)).to eql(302400)
+      end
 
     end
     
